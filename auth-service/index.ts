@@ -2,7 +2,7 @@ import configDB from "./src/infrastructure/database/configDB";
 import server from "./src/presentation/server";
 
 (async()=>{
-    try{
+    try{3
         server;
         await configDB()
     }catch(err:any){
