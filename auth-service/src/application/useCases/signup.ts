@@ -1,17 +1,21 @@
-import { userEntity } from "../../domian/Entities";
+import { UserEntity } from "../../domian/Entities";
+import { IDependencies } from "../interfaces/IDependencies";
 
-export const signupUsecase=(dependencies:any)=>{
-    const {repositories:{userSignUpRepo}}=dependencies;
-    
-    if(!userSignUpRepo){
+export const signUpUseCase=(dependencies:IDependencies)=>{
+    const {repositories:{signUp}}=dependencies;
+
+    if(!signUp){
         throw new Error("Dependency required for signUp")
     }
-    const execute=async(userCredentials:userEntity)=>{
-        try{
-            return await userSignUpRepo(userCredentials)
-        }catch(err:any){
-            console.log(err?.message,"error in usecase");
-        }
+
+    return {
+         execute:async(userCredentials:UserEntity)=>{
+            try{
+                return await signUp(userCredentials)
+            }catch(err:any){
+                console.log(err?.message,"error in usecase");
+                throw new Error(err?.message)
+            }
+        },
     }
-    return {execute}
 }

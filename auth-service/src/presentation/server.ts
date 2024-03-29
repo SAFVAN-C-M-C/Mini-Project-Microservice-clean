@@ -1,8 +1,8 @@
 import express,{Application,Request,Response, Router} from 'express'
 import {config} from 'dotenv'
 import cookieParser from 'cookie-parser'
-import { userRoutes } from '../infrastructure/routes/userRouter';
-import dependencies from '../config/dependencies';
+import { authRoutes } from '../infrastructure/routes/authRouter';
+import {dependencies} from '../config/dependencies';
 
 config()
 const app:Application=express();
@@ -12,10 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser())
 
-app.get('/',(req:Request,res:Response)=>{
-    res.status(200).json({message:"user service is running!"})
-})
-app.use("/user",userRoutes(dependencies))
+
+app.use("/",authRoutes(dependencies))
 app.listen(PORT,()=>{
     console.log(`User service is running on the port : ${PORT}\nhttp://localhost:${PORT}`);
 })

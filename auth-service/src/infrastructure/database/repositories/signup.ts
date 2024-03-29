@@ -1,11 +1,15 @@
-import { userEntity } from "../../../domian/Entities";
+import { UserEntity } from "../../../domian/Entities";
 import { User } from "../models/user";
 
-export const userSignUpRepo=async(userCredentials:userEntity)=>{
+export const signUp=async(userCredentials:UserEntity)=>{
     try{  
         const userData = await User.create(userCredentials)
-        return userData as userEntity
+        if(!userData){
+            throw new Error("user creation failed")
+        }
+        return userData as UserEntity
     }catch(err:any){
         console.log(err,"Error occured while signUp");
+        throw new Error(err?.message)
     }
 }

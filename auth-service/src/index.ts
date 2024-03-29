@@ -1,8 +1,8 @@
-import configDB from "./src/infrastructure/database/configDB";
-import server from "./src/presentation/server";
+import configDB from "./infrastructure/database/configDB";
+import server from "./presentation/server";
 
 (async()=>{
-    try{3
+    try{
         server;
         await configDB()
     }catch(err:any){
@@ -13,4 +13,4 @@ import server from "./src/presentation/server";
             process.exit()
         })
     }
-})()
+})();

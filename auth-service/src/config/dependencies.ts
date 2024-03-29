@@ -1,7 +1,8 @@
 import * as repositories from '../infrastructure/database/repositories'
 import * as useCase from "../application/useCases"
+import { IDependencies } from '../application/interfaces/IDependencies'
 
-export default{
-    repositories,
-    useCase
+export const dependencies:IDependencies={
+    useCase,
+    repositories
 }

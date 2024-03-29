@@ -1,11 +1,17 @@
-import { Types } from "mongoose";
+import { ObjectId } from "mongoose";
 
 
-export interface userEntity{
-    _id?:Types.ObjectId;
-    name:string;
+export interface UserEntity{
+    _id?: ObjectId | string;
+    username:string;
     email:string;
     password:string;
-    isAdmin:boolean;
+    role:Role;
+    isAdmin:boolean,
     isBlocked:boolean;
 }
+enum Role{
+    user = 'user',
+    admin = 'admin'
+}
+
