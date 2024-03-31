@@ -1,7 +1,7 @@
-import mongoose, { Document, Schema } from "mongoose";
-import { UserEntity } from "../../../domian/Entities";
+import mongoose, { Schema } from "mongoose";
+import { AdminEntity } from "../../../domain/entities/AdminEntity";
 
-const userSchema: Schema = new Schema(
+const adminSchema = new Schema(
   {
     username: {
       type: String,
@@ -19,7 +19,7 @@ const userSchema: Schema = new Schema(
     role: {
       type: String,
       enum: ["user", "admin"],
-      default: "user",
+      default: "admin",
     },
     isBlocked: {
       type: Boolean,
@@ -27,7 +27,7 @@ const userSchema: Schema = new Schema(
     },
     isAdmin: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   {
@@ -35,4 +35,4 @@ const userSchema: Schema = new Schema(
   }
 );
 
-export const User = mongoose.model<UserEntity>("logincredentials", userSchema);
+export const Admin=mongoose.model<AdminEntity>("logincredentials",adminSchema);

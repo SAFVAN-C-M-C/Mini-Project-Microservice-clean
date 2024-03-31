@@ -17,6 +17,6 @@ export default async ()=>{
             console.log(err.message);
         })
     } catch (error) {
-            throw new Error("Error in connecting user-database");
+        throw new Error("Error in connecting admin-database");
     }
 }
