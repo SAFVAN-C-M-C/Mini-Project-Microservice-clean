@@ -13,7 +13,7 @@ export default async ()=>{
                 _| |_.' /_| |__) | | \\__. | \\__. | | | | |  | | | || \\__.,| \\__. || |,| \\__.,| \\__/  |  
                |______.'|_______/  '.___.' '.__.' [___||__][___||__]'.__.''.___.' \\__/ '.__.' '.__.;__] 
                                                                                                        
-        \x1b[0m🍃🍃🍃🍃🍃🍃 MongoDB connected successfully! 🍃🍃🍃🍃🍃🍃`);
+        \x1b[0m🍃🍃🍃🍃🍃🍃 MongoDB admin connected successfully! 🍃🍃🍃🍃🍃🍃`);
       } catch (error: any) {
         console.error(`🍁🍁🍁🍁🍁 Database Connection failed 🍁🍁🍁🍁🍁`);
         console.error(error.message);

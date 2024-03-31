@@ -3,6 +3,7 @@ import {UserEntity} from '../../domian/Entities'
 import { hashPassword } from "../../util/bcrypt/hashPassword"
 import jwt from "jsonwebtoken"
 import { IDependencies } from "../../application/interfaces/IDependencies"
+import { userCreatedProducer } from "../../infrastructure/kafka/producers/userCreatedProducer"
 
 export const userSignUp=(dependencies:IDependencies)=>{
     const {useCase:{signUpUseCase,findUserByEmailUseCase}}=dependencies
@@ -42,7 +43,7 @@ export const userSignUp=(dependencies:IDependencies)=>{
             
             const user=await signUpUseCase(dependencies).execute(userCredentials);
             if(user){
-                const userId:string=user?._id?String(user?._id):""
+                const userId: string = user._id?.toString() ?? "";
                 const payload={
                     _id:userId,
                     email:user?.email,
@@ -53,6 +54,18 @@ export const userSignUp=(dependencies:IDependencies)=>{
                 const accessToken = jwt.sign(payload,String(process.env.ACCESS_TOKEN_SECRET),{expiresIn:"1h"});
                 res.cookie("jw_token",accessToken,{maxAge: 1000 * 60 * 60 * 24,httpOnly:true})
                 res.status(201).json({message:"User created successfully",success:true, user: user})
+                const addedUser = {
+                    _id: user?._id,
+                    username: user.username,
+                    email: user.email,
+                    password: user.password,
+                    role: user.role,
+                    isBlocked: user.isBlocked,
+                    isAdmin: user.isAdmin,
+                  };
+                  if (addedUser) {
+                    userCreatedProducer(addedUser);
+                  }
             }else{
                 res.status(404).json({ success: false, message: "error while creating user" });
             }
