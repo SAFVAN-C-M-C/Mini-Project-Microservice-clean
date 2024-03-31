@@ -24,6 +24,7 @@ app.get('/',(req:Request,res:Response)=>{
 //proxies
 app.use("/auth",proxy("http://localhost:1234"));
 app.use("/admin",proxy("http://localhost:1235"));
+app.use("/product",proxy("http://localhost:1236"));
 
 
 app.listen(PORT,()=>console.log(`

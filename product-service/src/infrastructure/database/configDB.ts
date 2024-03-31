@@ -1,4 +1,4 @@
-import mongoose,{connect} from "mongoose";
+import mongoose, { connect } from "mongoose";
 import { config } from "dotenv";
 export default async ()=>{
     config()
